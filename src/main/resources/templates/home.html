@@ -11,6 +11,19 @@
   <link rel="stylesheet" href ="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
   <style>
+    /*.small{*/
+    /*  font-size: 12px;*/
+    /*}*/
+    .post-body{
+      width: 520px;
+    }
+    .body{
+      background: #181a1b;
+    }
+
+    .post{
+      color: #fff;
+    }
 
     .btn a {
       color: #fff!important;
@@ -24,7 +37,7 @@
 
   </style>
 </head>
-<body>
+<body class="body">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -56,7 +69,7 @@
   <div class="row">
     <div class="col-lg-3 d-md-block">
       <div class="shadow p-3 mb-5 bg-body rounded text-center mr-4">
-        <img class="avatar mb-3" src="/dipson.jpg" alt="picture"/>
+        <img class="avatar mb-3" src="css/image.jpeg" alt="picture"/>
         <h4 class="my-1" th:text="*{thisUser.firstName + ' ' + thisUser.lastName}"></h4>
       </div>
     </div>
@@ -76,23 +89,24 @@
         </div>
       </div>
 
-      <h4 class="mb-4">Posts</h4>
+      <h4 class="mb-4 post">Posts</h4>
       <div class="post-post shadow-none p-3 mb-5 bg-light rounded" th:each="post : ${allPosts}">
         <div class="row mt-3 mb-5" >
           <div class="col-lg-2">
 <!--            <div class="" th:text="'@'  + *{post.getUser().getFirstName()}"></div>-->
 <!--          </div>-->
           <div class="col-lg-10">
+            <h4 class="my-1 small" th:text="*{ '@' + thisUser.firstName}"></h4>
             <div class="post-body" th:text="*{post.getMessage()}"></div>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-3">
-            <a th:href="@{/comment/{postId}(postId=${post.getId()})}" class="btn btn-success btn-sm button">comment</a>
+            <a th:href="@{/comment/{postId}(postId=${post.getId()})}" class="btn btn-primary btn-sm button">comment</a>
           </div>
           <div class="col-lg-3">
             <form th:action="@{/like/{id}(id=${post.getId()})}" method="post" th:object="${newPostlike}">
-              <button type="submit" value="" class="btn btn-success btn-sm button"  th:text="${post.getLikes().size()} + ' ' + Like"></button>
+              <button type="submit" value="" class="btn btn-primary btn-sm button"  th:text="${post.getLikes().size()} + ' ' + Like"></button>
             </form>
           </div >
           <div>
@@ -101,12 +115,13 @@
           </div>
           <div class="col-lg-3" style="color: #fff;" >
             <form th:action="@{/delete/{id}(id=${post.getId()})}" method="post" th:object="${postdelete}">
-              <button type="submit" value="" class="btn btn-success btn-sm button" >Delete</button>
+              <button type="submit" value="" class="btn btn-danger btn-sm button" >Delete</button>
             </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 <section class="container">

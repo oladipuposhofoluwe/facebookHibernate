@@ -37,6 +37,8 @@ public class CommentController {
         model.addAttribute("allComment", commentService.findAll(postId));
         return "comment";
     }
+
+
     @PostMapping("/comment/{id}")
     public String newComment(@PathVariable("id") Long id, HttpSession session,  String comment) {
         Comment comment1 = new Comment();
@@ -81,6 +83,7 @@ public class CommentController {
         commentService.deleteComment(comment);
         return "redirect:/home";
     }
+
 
     @PostMapping("/comment/like/{id}")
     public String likeIndex(@PathVariable("id") Long id, HttpSession session, CommentLike like, Model model) {
